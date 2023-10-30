@@ -20,7 +20,7 @@ class LaMaActor:
     ):
         # load predict config
         self.config_path = config_path
-        assert os.path.isfile(config_path)
+        assert os.path.isfile(config_path), f"[{config_path}] is not exist!"
         self.predict_config = OmegaConf.load(config_path)
         self.device = torch.device(self.predict_config.device)
 
@@ -86,4 +86,5 @@ class LaMaActor:
         return result_image
 
     def ping(self):
-        print(f"CUDA_VISIBLE_DEVICES: {os.environ['CUDA_VISIBLE_DEVICES']}")
+        print("ray.get_gpu_ids(): {}".format(ray.get_gpu_ids()))
+        print("CUDA_VISIBLE_DEVICES: {}".format(os.environ["CUDA_VISIBLE_DEVICES"]))
