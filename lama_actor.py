@@ -11,6 +11,7 @@ class LaMaActor:
     def __init__(
         self,
         config_path: str,
+        max_wh: int = 2560,
     ):
         # load predict config
         self.config_path = config_path
@@ -34,6 +35,13 @@ class LaMaActor:
             train_config=self.train_config,
             checkpoint_path=self.checkpoint_path,
             device=self.device,
+        )
+        self.max_wh = max_wh
+        # dry run
+        self.model(
+            torch.tensor(
+                np.zeros([1, 4, self.max_wh, self.max_wh], dtype=np.float32)
+            ).to(self.device)
         )
 
     def run(self, image_original: np.ndarray, image_mask: np.ndarray) -> np.ndarray:
