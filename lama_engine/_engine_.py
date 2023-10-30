@@ -19,7 +19,8 @@ class LaMaEngine:
         self._actors_per_gpu = actors_per_gpu
 
         # start ray service
-        ray.init(num_gpus=self.number_of_gpu)
+        if not ray.is_initialized():
+            ray.init(num_gpus=self.number_of_gpu, ignore_reinit_error=True)
 
         # create ray instance
         self._actors = [
@@ -28,6 +29,8 @@ class LaMaEngine:
             )
             for _ in range(self.number_of_total_actor)
         ]
+        for idx, actor in enumerate(self._actors):
+            print(f"ACTOR[{idx}]] STATUS :: {ray.get(actor.ping.remote())}")
         self._actor_pool = ActorPool(self._actors)
 
     def __del__(self):
@@ -35,29 +38,29 @@ class LaMaEngine:
         _ = [ray.kill(actor) for actor in self._actors]
 
         # shutdown ray service
-        ray.shutdown(_exiting_interpreter=False)
+        # ray.shutdown(_exiting_interpreter=True)
 
     def run(
         self,
         inputs: List[Tuple[np.ndarray, np.ndarray]],
-        device_id: Optional[int] = None,
+        actor_id: Optional[int] = None,
     ) -> Union[List[np.ndarray], None]:
         """
         Inpainting with LaMa.
 
         Args:
             inputs (List[Tuple[np.ndarray, np.ndarray]]): tuple(Image[H x W x 3], Mask[H x W])로 이루어진 List를 입력으로 넣습니다.
-            device_id (Optional[int], optional): None이 아니라면 해당 id의 actor로만 inference를 수행합니다. Defaults to None.
+            actor_id (Optional[int], optional): None이 아니라면 해당 id의 actor로만 inference를 수행합니다. Defaults to None.
 
         Returns:
             Union[List[np.ndarray], None]: Result Image[H x W x 3]으로 이루어진 List를 반환합니다. 오류 발생 시 None을 반환합니다.
         """
         results = None
         try:
-            if device_id != None:
-                assert device_id > -1 and device_id < self.number_of_total_actor
+            if actor_id != None:
+                assert actor_id > -1 and actor_id < self.number_of_total_actor
                 result_remote = [
-                    self._actors[device_id].run.remote(image, mask)
+                    self._actors[actor_id].run.remote(image, mask)
                     for image, mask in inputs
                 ]
                 results = ray.get(result_remote)
@@ -74,9 +77,9 @@ class LaMaEngine:
     def __call__(
         self,
         inputs: List[Tuple[np.ndarray, np.ndarray]],
-        device_id: Optional[int] = None,
+        actor_id: Optional[int] = None,
     ) -> Union[List[np.ndarray], None]:
-        return self.run(inputs=inputs, device_id=device_id)
+        return self.run(inputs=inputs, actor_id=actor_id)
 
     @property
     def config_path(self):
