@@ -1,0 +1,1 @@
+lama model의 weight(*.ckpt)가 이곳에 위치해야합니다.
