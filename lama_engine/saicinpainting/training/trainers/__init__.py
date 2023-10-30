@@ -1,7 +1,11 @@
 import logging
 import torch
-from saicinpainting.training.trainers.default import DefaultInpaintingTrainingModule
-from saicinpainting.training.trainers.custom import CustomInpaintingTrainingModule
+from lama_engine.saicinpainting.training.trainers.default import (
+    DefaultInpaintingTrainingModule,
+)
+from lama_engine.saicinpainting.training.trainers.custom import (
+    CustomInpaintingTrainingModule,
+)
 
 
 def get_training_model_class(kind):
