@@ -35,11 +35,11 @@ def copy_dir():
 
 setup(
     name="lama-engine",
-    version="0.3.6",
+    version="0.3.7",
     # package_dir={"lama_engine": "lama_engine"},
     packages=find_packages(),
     install_requires=REQUIREMENTS,
     package_data={
-        "lama_engine": ["lama_engine/**"],
+        "lama_engine": ["lama_engine/*"],
     },
 )
