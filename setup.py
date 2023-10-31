@@ -27,7 +27,7 @@ REQUIREMENTS = [
 
 setup(
     name="lama-engine",
-    version="0.3.12",
+    version="0.3.13",
     # package_dir={"lama_engine": "lama_engine"},
     packages=find_packages(),
     install_requires=REQUIREMENTS,
