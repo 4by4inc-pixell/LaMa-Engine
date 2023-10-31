@@ -26,7 +26,7 @@ INCLUDE_MODULE = ["lama_engine"]
 
 setup(
     name="lama-engine",
-    version="0.1.0",
+    version="0.2.0",
     packages=find_packages(include=INCLUDE_MODULE),
     install_requires=REQUIREMENTS,
 )
