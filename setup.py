@@ -33,6 +33,10 @@ setup(
     install_requires=REQUIREMENTS,
     include_package_data=True,
     package_data={
-        "lama_engine": ["lama_engine/**", "*.mat", "*.pth"],
+        "lama_engine": [
+            "lama_engine/**",
+            "lama_engine/models/ade20k/*.mat",
+            "lama_engine/models/lpips_models/*.pth",
+        ],
     },
 )
