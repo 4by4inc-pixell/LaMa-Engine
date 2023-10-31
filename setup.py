@@ -21,10 +21,13 @@ REQUIREMENTS = [
     "ray==2.7.1",
 ]
 
+INCLUDE_MODULE = ["lama_engine"]
+
 
 setup(
     name="lama-engine",
-    version="0.3.0",
+    version="0.3.1",
+    package_dir={"lama_engine": "lama_engine"},
     packages=[""],
     install_requires=REQUIREMENTS,
 )
