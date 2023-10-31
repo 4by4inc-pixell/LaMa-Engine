@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 
 REF_DIR = os.path.dirname(os.path.dirname(__file__))
-CONFIG_PATH = os.path.join(REF_DIR, "configs", "predict_config.yaml")
+CONFIG_PATH = os.path.join(REF_DIR, "assets", "predict_config.yaml")
 NUMBER_OF_ACTOR_PER_GPU = 1
 TARGET_RESOLUTIONS_FOR_DYNAMIC_INPUT_TEST = {
     "SD": (480, 640, 3),

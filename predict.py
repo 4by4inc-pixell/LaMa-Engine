@@ -10,7 +10,7 @@ REF_DIR = os.path.dirname(__file__)
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--config_path", type=str, default=f"{REF_DIR}/configs/predict_config.yaml"
+        "--config_path", type=str, default=f"{REF_DIR}/assets/predict_config.yaml"
     )
 
     return parser.parse_args()
