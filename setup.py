@@ -21,13 +21,13 @@ REQUIREMENTS = [
     "ray==2.7.1",
 ]
 
-INCLUDE_MODULE = ["lama_engine"]
+# INCLUDE_MODULE = ["lama_engine", "lama_engine.models", "lama_engine.saicinpainting"]
 
 
 setup(
     name="lama-engine",
-    version="0.3.3",
+    version="0.3.4",
     package_dir={"lama_engine": "lama_engine"},
-    packages=find_packages(include=INCLUDE_MODULE),
+    packages=find_packages(),
     install_requires=REQUIREMENTS,
 )
