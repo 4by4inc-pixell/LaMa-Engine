@@ -16,7 +16,7 @@ REQUIREMENTS = [
     "easydict",
     "pandas",
     "lightning",
-    "kornia ==0.5.0",
+    "kornia==0.5.0",
     "scikit-learn",
     "ray==2.7.1",
 ]
