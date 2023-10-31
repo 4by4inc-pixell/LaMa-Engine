@@ -27,7 +27,7 @@ REQUIREMENTS = [
 
 setup(
     name="lama-engine",
-    version="0.3.13",
+    version="0.3.14",
     # package_dir={"lama_engine": "lama_engine"},
     packages=find_packages(),
     install_requires=REQUIREMENTS,
@@ -35,8 +35,8 @@ setup(
     package_data={
         "lama_engine": [
             "lama_engine/**",
-            "lama_engine/models/ade20k/*.mat",
-            "lama_engine/models/lpips_models/*.pth",
+            # "lama_engine/models/ade20k/*.mat",
+            # "lama_engine/models/lpips_models/*.pth",
         ],
     },
 )
